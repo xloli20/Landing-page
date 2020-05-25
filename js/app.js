@@ -35,6 +35,18 @@
 
 // build the nav
 
+document.addEventListener('DOMContentLoaded', function () {
+  const navbarList = document.getElementById('navbar__list');
+
+  // create <li> elements
+  for (let i = 1; i <= 4; i++) {
+    const li = document.createElement('li');
+    li.textContent = 'section ' + i;
+    navbarList.appendChild(li);
+    navbarList.style.cssText = 'color: rgba(0,13,60,1); font-size: 20px';
+    li.style.padding = '10px';
+  }
+});
 
 // Add class 'active' to section when near top of viewport
 
@@ -42,10 +54,11 @@
 // Scroll to anchor ID using scrollTO event
 
 
+
 /**
  * End Main Functions
  * Begin Events
- * 
+ *
 */
 
 // Build menu 
