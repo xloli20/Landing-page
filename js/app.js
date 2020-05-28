@@ -18,7 +18,6 @@
  * 
 */
 let activeLink = null;
-const sections = document.querySelectorAll('section');
 
 /**
  * End Global Variables
@@ -38,12 +37,16 @@ document.addEventListener('DOMContentLoaded', function () {
   const navbarList = document.getElementById('navbar__list');
 
   // build the nav
-  for (let i = 1; i <= 4; i++) {
+  const sections = document.getElementsByTagName('section');
+  for (const section of sections) {
+    let sectionId = section.getAttribute("id");
+
     const li = document.createElement('li');
     navbarList.appendChild(li);
     const a = document.createElement('a');
-    a.textContent = 'section' + i;
-    a.id = 'menu__link';
+    a.textContent = sectionId;
+    a.class = 'menu__link';
+    a.href = '#'+sectionId;
     li.appendChild(a);
     navbarList.style.cssText = 'color: rgba(0,13,60,1); font-size: 20px';
     li.style.padding = '10px';
@@ -61,12 +64,17 @@ document.addEventListener('DOMContentLoaded', function () {
   // change the section color when section is viewed while scrolling through the page.
   window.addEventListener("scroll", function () {
     for (let section of sections) {
+
+      const activeLink2 = document.querySelector(
+        `a[href="#${section.getAttribute("id")}"]`
+      );
+
       if (isElementInViewport(section)) {
-        activeLink = section.id;
-        activeLink.style.cssText = 'color: rgba(0,13,60,1)';
+        section.classList.add("your-active-class");
+        activeLink2.classList.add("menu__link_active");
       } else {
-        activeLink.style.cssText = 'color: rgba(136,203,171,1)';
-        activeLink = null;
+        section.classList.remove("your-active-class");
+        activeLink2.classList.remove("menu__link_active");
       }
     }
   });
